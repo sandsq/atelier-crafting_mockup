@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bnxdjhnka2e51"]
+
+[ext_resource type="PackedScene" uid="uid://dpd518jjx6j2o" path="res://inventory/inventory.tscn" id="1_evnqv"]
+[ext_resource type="PackedScene" uid="uid://dqn5nfq55ftm1" path="res://recipe/recipe.tscn" id="2_uknu5"]
+
+[node name="CraftingScreen" type="Control" unique_id=1128655894]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=210696935]
+
+[node name="Inventory" parent="CanvasLayer" unique_id=439026070 instance=ExtResource("1_evnqv")]
+
+[node name="Control" type="Control" parent="." unique_id=1541315281]
+anchors_preset = 0
+offset_bottom = 40.0
+
+[node name="Recipe" parent="Control" unique_id=929598019 instance=ExtResource("2_uknu5")]
+position = Vector2(-4, 0)

@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dqn5nfq55ftm1"]
+
+[ext_resource type="PackedScene" uid="uid://dmi72cfam1tvr" path="res://recipe/basic_coal_req.tscn" id="2_7w6u8"]
+[ext_resource type="Script" uid="uid://04gswdts3g4b" path="res://recipe/recipe_camera.gd" id="3_7w6u8"]
+[ext_resource type="PackedScene" uid="uid://dl6wj32f1kc1s" path="res://recipe/basic_metal_req.tscn" id="3_q3b7v"]
+[ext_resource type="PackedScene" uid="uid://dbjlai2lc0ffo" path="res://recipe/elemental_enhancement.tscn" id="4_8jsva"]
+[ext_resource type="PackedScene" uid="uid://cb4epqhawd7u2" path="res://recipe/sharpen.tscn" id="5_otgs3"]
+
+[node name="Recipe" type="Node2D" unique_id=679107252]
+
+[node name="BasicCoalReq" parent="." unique_id=1147150298 instance=ExtResource("2_7w6u8")]
+offset_bottom = 227.0
+
+[node name="BasicMetalReq" parent="." unique_id=1407456502 node_paths=PackedStringArray("prerequisites") instance=ExtResource("3_q3b7v")]
+offset_left = 424.0
+offset_top = 178.0
+offset_right = 624.0
+offset_bottom = 405.0
+prerequisites = [NodePath("../BasicCoalReq")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1974286957]
+position = Vector2(12, 317)
+script = ExtResource("3_7w6u8")
+
+[node name="ElementalEnhancement" parent="." unique_id=2055344568 node_paths=PackedStringArray("prerequisites") instance=ExtResource("4_8jsva")]
+offset_left = -174.0
+offset_top = 309.0
+offset_right = 26.0
+offset_bottom = 536.0
+prerequisites = [NodePath("../BasicCoalReq")]
+
+[node name="Sharpen" parent="." unique_id=1454229345 node_paths=PackedStringArray("prerequisites") instance=ExtResource("5_otgs3")]
+offset_left = 152.0
+offset_top = 559.0
+offset_right = 352.0
+offset_bottom = 786.0
+prerequisites = [NodePath("../BasicMetalReq"), NodePath("../ElementalEnhancement")]

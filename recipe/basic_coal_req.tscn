@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dmi72cfam1tvr"]
+
+[ext_resource type="PackedScene" uid="uid://e4x0fmi44y7k" path="res://recipe/recipe_node.tscn" id="1_d6hri"]
+
+[node name="BasicCoalReq" unique_id=1147150298 instance=ExtResource("1_d6hri")]
+fill_thresholds = Array[int]([2, 3])
+stats_at_thresholds = Array[String](["+1 attack", "+2 attack"])

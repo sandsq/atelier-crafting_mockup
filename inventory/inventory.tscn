@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dpd518jjx6j2o"]
+
+[ext_resource type="Script" uid="uid://cn6j6gwfagp6r" path="res://inventory/inventory.gd" id="1_62wf1"]
+
+[node name="Inventory" type="MarginContainer" unique_id=439026070]
+script = ExtResource("1_62wf1")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=223831279]
+layout_mode = 2
+columns = 4

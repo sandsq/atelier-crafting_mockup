@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dbjlai2lc0ffo"]
+
+[ext_resource type="PackedScene" uid="uid://e4x0fmi44y7k" path="res://recipe/recipe_node.tscn" id="1_sl4x3"]
+
+[node name="ElementalEnhancement" unique_id=1147150298 node_paths=PackedStringArray("prerequisites") instance=ExtResource("1_sl4x3")]
+fill_thresholds = Array[int]([3])
+stats_at_thresholds = Array[String](["+1 water damage"])
+elemental_requirement = 1
+prerequisites = [null]

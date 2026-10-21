@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cb4epqhawd7u2"]
+
+[ext_resource type="PackedScene" uid="uid://e4x0fmi44y7k" path="res://recipe/recipe_node.tscn" id="1_x36fg"]
+
+[node name="Sharpen" unique_id=1147150298 node_paths=PackedStringArray("prerequisites") instance=ExtResource("1_x36fg")]
+fill_thresholds = Array[int]([2])
+stats_at_thresholds = Array[String](["+5 attack"])
+elemental_requirement = 2
+prerequisites = [null, null]

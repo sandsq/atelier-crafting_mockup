@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dijxon8x58000"]
+
+[ext_resource type="PackedScene" uid="uid://iikjyym0qavx" path="res://materials/crafting_material.tscn" id="1_4xirt"]
+[ext_resource type="Script" uid="uid://bjanb21v7qxyd" path="res://crafting_material_info.gd" id="2_xp5go"]
+
+[sub_resource type="Resource" id="Resource_8jsva"]
+script = ExtResource("2_xp5go")
+material_name = "Iron"
+length = 60
+height = 20
+element = 2
+metadata/_custom_type_script = "uid://bjanb21v7qxyd"
+
+[node name="IronIngot" unique_id=491399532 instance=ExtResource("1_4xirt")]
+crafting_material_info = SubResource("Resource_8jsva")
