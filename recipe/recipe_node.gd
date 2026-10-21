@@ -3,11 +3,12 @@ class_name RecipeNode
 
 ## when a node is completed, send itself in the signal. The node that has this as a prereq will be notified which prereq has been completed and the corresponding arrow will turn green. 
 signal node_completed(node: RecipeNode)
+signal bonus_changed(node: RecipeNode, new_bonus: WeaponBonus)
 
 ## at >= fill_thresholds[0] of an element put into this node, give the first tier of stats. At >= fill_thresholds[1] of an element, give the second tier of bonuses. Etc.
 @export var fill_thresholds: Array[int] = [1, 3]
-## see fill_thresholds. Use strings as placeholders for actual stat increases
-@export var stats_at_thresholds: Array[String] = ["", ""]
+## see fill_thresholds. 
+@export var stats_at_thresholds: Array[WeaponBonus] = []
 @export var elemental_requirement: Elements.Elements = Elements.Elements.FIRE
 @export var prerequisites: Array[RecipeNode]
 
@@ -87,6 +88,15 @@ func append_to_crafting_materials_in_node(new_material: CraftingMaterial):
 	if crafting_materials_in_node.size() >= fill_thresholds[0]:
 		is_complete = true
 		print("completed %s quantity in %s" % [crafting_materials_in_node.size(), self])
+
+	for i in range(fill_thresholds.size() - 1, -1, -1):
+		var fill_threshold = fill_thresholds[i]
+		if crafting_materials_in_node.size() == fill_threshold:
+			emit_signal("bonus_changed", self, stats_at_thresholds[i])
+			break
+
+func return_node_stats():
+	pass
 
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 	if data.item == null:

@@ -1,9 +1,15 @@
 [gd_scene format=3 uid="uid://cb4epqhawd7u2"]
 
 [ext_resource type="PackedScene" uid="uid://e4x0fmi44y7k" path="res://recipe/recipe_node.tscn" id="1_x36fg"]
+[ext_resource type="Script" uid="uid://6hx3jygt2o2a" path="res://weapon_bonus.gd" id="2_esnhg"]
+
+[sub_resource type="Resource" id="Resource_pt4kn"]
+script = ExtResource("2_esnhg")
+bonus_amount = 5
+metadata/_custom_type_script = "uid://6hx3jygt2o2a"
 
 [node name="Sharpen" unique_id=1147150298 node_paths=PackedStringArray("prerequisites") instance=ExtResource("1_x36fg")]
 fill_thresholds = Array[int]([2])
-stats_at_thresholds = Array[String](["+5 attack"])
+stats_at_thresholds = Array[ExtResource("2_esnhg")]([SubResource("Resource_pt4kn")])
 elemental_requirement = 2
 prerequisites = [null, null]

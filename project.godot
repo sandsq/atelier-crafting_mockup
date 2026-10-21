@@ -19,10 +19,12 @@ config/icon="res://icon.svg"
 
 Elements="*uid://3hl7f0ouodq6"
 Globals="*uid://cy72wm8axghsg"
+Stats="*uid://dqpf3q5a64u3a"
 
 [display]
 
-window/size/viewport_width=1280
+window/size/viewport_width=1600
+window/size/viewport_height=900
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

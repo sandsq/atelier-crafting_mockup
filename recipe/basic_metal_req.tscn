@@ -1,9 +1,20 @@
 [gd_scene format=3 uid="uid://dl6wj32f1kc1s"]
 
 [ext_resource type="PackedScene" uid="uid://e4x0fmi44y7k" path="res://recipe/recipe_node.tscn" id="1_gk1a3"]
+[ext_resource type="Script" uid="uid://6hx3jygt2o2a" path="res://weapon_bonus.gd" id="2_a32un"]
+
+[sub_resource type="Resource" id="Resource_x4vul"]
+script = ExtResource("2_a32un")
+bonus_amount = 1
+metadata/_custom_type_script = "uid://6hx3jygt2o2a"
+
+[sub_resource type="Resource" id="Resource_tyd84"]
+script = ExtResource("2_a32un")
+bonus_amount = 2
+metadata/_custom_type_script = "uid://6hx3jygt2o2a"
 
 [node name="BasicMetalReq" unique_id=1147150298 node_paths=PackedStringArray("prerequisites") instance=ExtResource("1_gk1a3")]
 fill_thresholds = Array[int]([2, 4])
-stats_at_thresholds = Array[String](["+1 slashing damage", "+2 slashing damage"])
+stats_at_thresholds = [SubResource("Resource_x4vul"), SubResource("Resource_tyd84")]
 elemental_requirement = 2
 prerequisites = [null]
