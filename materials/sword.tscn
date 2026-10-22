@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dfst4m7pytg0m"]
+
+[ext_resource type="PackedScene" uid="uid://byrlmfod7rt0r" path="res://materials/item.tscn" id="1_8gmkd"]
+[ext_resource type="Script" uid="uid://cgutkyvxgo0nu" path="res://materials/item_info.gd" id="2_f6ntv"]
+
+[sub_resource type="Resource" id="Resource_y0wwv"]
+script = ExtResource("2_f6ntv")
+name = "Sword"
+metadata/_custom_type_script = "uid://cgutkyvxgo0nu"
+
+[node name="Sword" unique_id=2095021968 instance=ExtResource("1_8gmkd")]
+item_info = SubResource("Resource_y0wwv")

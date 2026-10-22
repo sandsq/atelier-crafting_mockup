@@ -3,7 +3,9 @@ class_name RecipeNode
 
 ## when a node is completed, send itself in the signal. The node that has this as a prereq will be notified which prereq has been completed and the corresponding arrow will turn green. 
 signal node_completed(node: RecipeNode)
+signal node_uncompleted(node: RecipeNode)
 signal bonus_changed(node: RecipeNode, new_bonus: WeaponBonus)
+signal remove_all_pressed(node: RecipeNode, materials: Array[CraftingMaterial])
 
 ## at >= fill_thresholds[0] of an element put into this node, give the first tier of stats. At >= fill_thresholds[1] of an element, give the second tier of bonuses. Etc.
 @export var fill_thresholds: Array[int] = [1, 3]
@@ -22,8 +24,10 @@ var is_complete: bool = false:
 			emit_signal("node_completed", self)
 		else:
 			background.color = Color(1.0, 1.0, 1.0)
+			emit_signal("node_uncompleted", self)
 ## Track which prereq corresponds to which arrow. See signal node_completed.
 var prereq_to_line: Dictionary[RecipeNode, Line2D]
+var can_remove_items: Dictionary[RecipeNode, bool]
 
 @onready var background = $VBoxContainer/PanelContainer/Background
 @onready var material_holder = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MaterialHolder
@@ -58,6 +62,7 @@ func _ready() -> void:
 		prereq_to_line[prereq] = prereq_line
 		# A node will receive a signal from a prereq when that prereq is completed. This way, because nodes draw their prereqs' arrows, we can look up the prereq and its corresponding arrow and change the color
 		prereq.node_completed.connect(_on_node_completed)
+		prereq.node_uncompleted.connect(_on_node_uncompleted)
 		
 
 func draw_arrow_from_prereq(prereq: RecipeNode):
@@ -95,6 +100,21 @@ func append_to_crafting_materials_in_node(new_material: CraftingMaterial):
 			emit_signal("bonus_changed", self, stats_at_thresholds[i])
 			break
 
+	for prereq in prerequisites:
+		prereq.can_remove_items[self] = false
+
+func remove_crafting_materials_from_node():
+	for child in material_holder.get_children():
+		material_holder.remove_child(child)
+	for fill_indicator in fill_indicator_holder.get_children():
+		fill_indicator.color = Color(0.5, 0.5, 0.5)
+	is_complete = false
+	# crafting_materials_in_node = []
+	emit_signal("bonus_changed", self, null)
+
+	for prereq in prerequisites:
+		prereq.can_remove_items[self] = true
+	
 func return_node_stats():
 	pass
 
@@ -133,3 +153,17 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 func _on_node_completed(node: RecipeNode):
 	print("node %s's prereq of %s has been completed" % [self, node])
 	prereq_to_line[node].default_color = Color.SEA_GREEN
+
+func _on_node_uncompleted(node: RecipeNode):
+	prereq_to_line[node].default_color = Color.DARK_GOLDENROD
+
+func _on_button_pressed() -> void:
+	for node in can_remove_items.keys():
+		if not can_remove_items[node]:
+			print("can't remove items because prereq %s has items in it" % node)
+			return
+
+	print("need to handle situations where one node is a prereq for multiple other nodes, as once one postreq is cleared, the prereq is as well")
+	remove_crafting_materials_from_node()
+	emit_signal("remove_all_pressed", self, crafting_materials_in_node)
+	crafting_materials_in_node.clear()

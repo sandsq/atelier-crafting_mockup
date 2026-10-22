@@ -28,3 +28,11 @@ func _ready() -> void:
 		grid_container.add_child(inventory_slot)
 		if i < items.size():
 			inventory_slot.display_item_in_holder(items[i])
+
+func place_item_in_next_slot(item: CraftingMaterial):
+	for slot in grid_container.get_children():
+		if slot.item_holder.get_children().size() == 0:
+			slot.display_item_in_holder(item)
+			break
+
+	print("inventory ran out of space, placeholder to deal with it")

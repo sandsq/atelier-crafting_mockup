@@ -10,3 +10,4 @@ extends Resource
 @export var element: Elements.Elements
 @export var elemental_contribution: int = 1
 @export var size: int = 1 ## workbench has a maximum total size as a constraint
+@export var passive_buff: String = ""
