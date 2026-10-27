@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://dpd518jjx6j2o" path="res://inventory/inventory.tscn" id="1_evnqv"]
 [ext_resource type="Script" uid="uid://ct37m8ymsr0sn" path="res://crafting_screen.gd" id="1_uknu5"]
 [ext_resource type="PackedScene" uid="uid://dqn5nfq55ftm1" path="res://recipe/recipe.tscn" id="2_uknu5"]
+[ext_resource type="PackedScene" uid="uid://t5tyg57yi7pf" path="res://item_stats.tscn" id="3_2ypuk"]
+[ext_resource type="PackedScene" uid="uid://nn4rcxsdxeds" path="res://passives.tscn" id="4_0hjvc"]
 
 [node name="CraftingScreen" type="Control" unique_id=1128655894]
 layout_mode = 3
@@ -19,15 +21,19 @@ script = ExtResource("1_uknu5")
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="CraftButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=8949801]
+layout_mode = 2
+disabled = true
+text = "Craft!"
+
 [node name="Inventory" parent="CanvasLayer/VBoxContainer" unique_id=439026070 instance=ExtResource("1_evnqv")]
 layout_mode = 2
 
-[node name="ItemStats" type="VBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=763844231]
+[node name="ItemStats" parent="CanvasLayer/VBoxContainer" unique_id=1513399002 instance=ExtResource("3_2ypuk")]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/ItemStats" unique_id=1247296435]
+[node name="Passives" parent="CanvasLayer/VBoxContainer" unique_id=1348953694 instance=ExtResource("4_0hjvc")]
 layout_mode = 2
-text = "placeholder"
 
 [node name="Control" type="Control" parent="." unique_id=1541315281]
 anchors_preset = 0
@@ -35,3 +41,5 @@ offset_bottom = 40.0
 
 [node name="Recipe" parent="Control" unique_id=929598019 instance=ExtResource("2_uknu5")]
 position = Vector2(-4, 0)
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CraftButton" to="." method="_on_craft_button_pressed"]

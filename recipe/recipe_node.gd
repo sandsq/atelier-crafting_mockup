@@ -5,6 +5,7 @@ class_name RecipeNode
 signal node_completed(node: RecipeNode)
 signal node_uncompleted(node: RecipeNode)
 signal bonus_changed(node: RecipeNode, new_bonus: WeaponBonus)
+signal passive_changed(node: RecipeNode, passives: Array[String])
 signal remove_all_pressed(node: RecipeNode, materials: Array[CraftingMaterial])
 
 ## at >= fill_thresholds[0] of an element put into this node, give the first tier of stats. At >= fill_thresholds[1] of an element, give the second tier of bonuses. Etc.
@@ -28,6 +29,7 @@ var is_complete: bool = false:
 ## Track which prereq corresponds to which arrow. See signal node_completed.
 var prereq_to_line: Dictionary[RecipeNode, Line2D]
 var can_remove_items: Dictionary[RecipeNode, bool]
+var passives: Array[String]
 
 @onready var background = $VBoxContainer/PanelContainer/Background
 @onready var material_holder = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MaterialHolder
@@ -100,6 +102,10 @@ func append_to_crafting_materials_in_node(new_material: CraftingMaterial):
 			emit_signal("bonus_changed", self, stats_at_thresholds[i])
 			break
 
+	if new_material.crafting_material_info.passive_buff != "":
+		passives.append(new_material.crafting_material_info.passive_buff)
+		emit_signal("passive_changed", self, passives)
+
 	for prereq in prerequisites:
 		prereq.can_remove_items[self] = false
 
@@ -111,6 +117,7 @@ func remove_crafting_materials_from_node():
 	is_complete = false
 	# crafting_materials_in_node = []
 	emit_signal("bonus_changed", self, null)
+	emit_signal("passive_changed", self, [])
 
 	for prereq in prerequisites:
 		prereq.can_remove_items[self] = true

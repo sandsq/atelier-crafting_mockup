@@ -11,16 +11,24 @@ var items: Array[CraftingMaterial]
 @onready var grid_container = $GridContainer
 
 func _ready() -> void:
+	var coal1 = coal_scene.instantiate()
+	coal1.crafting_material_info.passive_buff = "Burn: Level 1"
+	items.append(coal1)
 	items.append(coal_scene.instantiate())
 	items.append(coal_scene.instantiate())
 	items.append(coal_scene.instantiate())
 	items.append(coal_scene.instantiate())
-	items.append(coal_scene.instantiate())
+	var water1 = vial_of_water_scene.instantiate()
+	water1.crafting_material_info.passive_buff = "Lifesteal: Level 1"
+	items.append(water1)
 	items.append(vial_of_water_scene.instantiate())
 	items.append(vial_of_water_scene.instantiate())
-	items.append(vial_of_water_scene.instantiate())
-	items.append(iron_ingot_scene.instantiate())
-	items.append(iron_ingot_scene.instantiate())
+	var ingot1 = iron_ingot_scene.instantiate()
+	ingot1.crafting_material_info.passive_buff = "Damage up: Level 1"
+	items.append(ingot1)
+	var ingot2 = iron_ingot_scene.instantiate()
+	ingot2.crafting_material_info.passive_buff = "Slash up: Level 1"
+	items.append(ingot2)
 	items.append(iron_ingot_scene.instantiate())
 	items.append(iron_ingot_scene.instantiate())
 	for i in range(0, inventory_size):

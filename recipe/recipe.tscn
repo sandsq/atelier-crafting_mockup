@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://dbjlai2lc0ffo" path="res://recipe/elemental_enhancement.tscn" id="4_8jsva"]
 [ext_resource type="PackedScene" uid="uid://cb4epqhawd7u2" path="res://recipe/sharpen.tscn" id="5_otgs3"]
 
-[node name="Recipe" type="Node2D" unique_id=679107252]
+[node name="Recipe" type="Node2D" unique_id=679107252 node_paths=PackedStringArray("primary_node")]
 script = ExtResource("1_otgs3")
+primary_node = NodePath("Nodes/BasicCoalReq")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1974286957]
 position = Vector2(12, 317)

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://t5tyg57yi7pf"]
+
+[ext_resource type="Script" uid="uid://ceuydsj7vev1f" path="res://item_stats.gd" id="1_vnhee"]
+
+[node name="ItemStats" type="VBoxContainer" unique_id=1513399002]
+script = ExtResource("1_vnhee")
+
+[node name="Label" type="Label" parent="." unique_id=307792483]
+layout_mode = 2
+text = "Bonuses:"
